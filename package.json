@@ -1,0 +1,31 @@
+{
+  "name": "npm-scripts-new-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build-css": "node-sass --include-path ./node_modules/normalize-scss/sass --include-path ./node_modules/jeet --source-map true --output-style compressed styles/scss -o styles && mv styles/main.css styles/main-min.css && mv styles/main.css.map styles/main-min.css.map",
+    "autoprefix-css": "postcss -u autoprefixer -r styles/*.css",
+    "build-js": "uglifyjs scripts/js/*.js -c -m -o scripts/main-min.js",
+    "optimize-images": "imagemin assets/images/* -o assets/images",
+    "optimize-icons": "svgo -f assets/icons -o assets/icons && rm -rf assets/icons/sprite.svg && svg-sprite-generate -d assets/icons -o assets/icons/sprite.svg",
+    "build-all": "npm run build-css && npm run autoprefix-css && npm run build-js && npm run optimize-images && npm run optimize-icons",
+    "live-server": "browser-sync start --server --files '*.html, styles/*.css, scripts/*.js'",
+    "watch-scss": "onchange 'styles/scss/*.scss' -- npm run build-css && npm run autoprefix-css",
+    "watch-js": "onchange 'scripts/js/*.js' -- npm run build-js",
+    "postinstall": "parallelshell 'npm run watch-scss' 'npm run watch-js' 'npm run live-server'",
+    "start": "parallelshell 'npm run watch-scss' 'npm run watch-js' 'npm run live-server'"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.0.0",
+    "browser-sync": "^2.23.6",
+    "jeet": "^7.2.0",
+    "imagemin-cli": "^3.0.0",
+    "node-sass": "^4.7.2",
+    "normalize-scss": "^7.0.1",
+    "onchange": "^3.3.0",
+    "parallelshell": "^3.0.2",
+    "postcss-cli": "^5.0.0",
+    "svgo": "^1.0.5",
+    "svg-sprite-generator": "^0.0.7",
+    "uglify-js": "^3.3.12"
+  }
+}
