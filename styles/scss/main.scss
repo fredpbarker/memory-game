@@ -1,13 +1,18 @@
 @import 'normalize';
 @include normalize();
 
-$primary-color: linear-gradient(to bottom, #011eff 0%, #00129e 100%);
-$secondary-color: #f2f2f2;
+/* Variables */
+
+$blue: linear-gradient(to bottom, #011eff 0%, #00129e 100%);
+$white: #f2f2f2;
+$orange: #df7619;
 $font: 'IBM Plex Serif', serif;
+
+/* General Page Rules */
 
 html,
 body {
-  background: $secondary-color;
+  background: $white;
   box-sizing: border-box;
   font-family: $font;
   font-size: 22px;
@@ -27,12 +32,15 @@ body {
   min-height: 100%;
 }
 
+/* Sidebar */
+
 .sidebar {
   align-items: center;
-  background: $primary-color;
-  color: $secondary-color;
+  background: $blue;
+  color: $white;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
   width: 18.181rem;
 }
 
@@ -72,10 +80,10 @@ body {
 
 .start-button,
 .restart-button {
-  background-color: #df7619;
+  background-color: $orange;
   border: 0;
-  box-shadow: 0 5px 0 0 #be5e08;
-  color: #fff;
+  box-shadow: 0 5px 0 0 darken($orange, 10%);
+  color: $white;
   font-family: $font;
   margin: 20px;
   outline: none;
@@ -93,7 +101,7 @@ body {
   }
 
   &:hover {
-    background-color: #ff881d;
+    background-color: lighten($orange, 5%);
   }
 }
 
@@ -105,10 +113,13 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Main Content Area */
+
 .main {
   align-items: center;
   display: flex;
   justify-content: center;
+  min-height: 100%;
   width: 100%;
 }
 
@@ -117,7 +128,6 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   list-style-type: none;
-  max-height: 27.272rem;
   max-width: 27.272rem;
   padding-left: 0;
 }
@@ -145,7 +155,7 @@ body {
 .deck__card figure {
   align-items: center;
   backface-visibility: hidden;
-  color: #fff;
+  color: $white;
   display: block;
   display: flex;
   font-size: 25px;
@@ -157,12 +167,12 @@ body {
 }
 
 .deck__card .deck__card--front {
-  background: linear-gradient(to bottom, rgba(0, 116, 217, 1) 0%, rgba(0, 65, 122, 1) 100%);
+  background: $blue;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .deck__card .deck__card--back {
-  background: #df7619;
+  background: $orange;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   transform: rotateY(180deg);
 }
@@ -170,6 +180,27 @@ body {
 .deck__card.flipped {
   transform: rotateY(180deg);
 }
+
+/* Media Queries */
+
+@media screen and (max-width: 975px) {
+  .deck {
+    max-width: 21rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .deck {
+    max-width: 14rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  // Change layout to stack
+}
+
+
+
 
 
 
