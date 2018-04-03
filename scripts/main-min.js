@@ -1,0 +1,1 @@
+function toggleClass(e){e.target.parentNode.classList.toggle("flipped")}const deck=document.querySelector(".deck");deck.addEventListener("click",toggleClass);

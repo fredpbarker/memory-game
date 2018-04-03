@@ -26,6 +26,6 @@
     "postcss-cli": "^5.0.0",
     "svgo": "^1.0.5",
     "svg-sprite-generator": "^0.0.7",
-    "uglify-js": "^3.3.12"
+    "uglify-es": "^3.3.9"
   }
 }
