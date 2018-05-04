@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400,500,600" rel="stylesheet">
-  <link rel="stylesheet" href="styles/main-min.css">
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/animate.min.css">
+  <link rel="stylesheet" href="styles/main.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   <title>Memory Game</title>
 </head>
@@ -15,7 +18,7 @@
   <div class="page-container">
     <div class="sidebar">
       <header class="header">
-        <img class="header__icon" src="assets/icons/brain.svg" alt="">
+        <img class="header__icon" src="assets/brain.svg" alt="">
         <h1 class="header__title">Memory<br>Game</h1>
       </header>
       <div class="game-information">
@@ -52,106 +55,11 @@
     </div>
     <div class="main">
       <ul class="deck">
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-bolt"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-bolt"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-bomb"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-bomb"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-wifi"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-wifi"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fab fa-medapps"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fab fa-medapps"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-camera-retro"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-camera-retro"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fab fa-dribbble"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fab fa-dribbble"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-hand-spock"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="fas fa-hand-spock"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="far fa-gem"></i></figure>
-          </div>
-        </li>
-        <li class="deck__card-container">
-          <div class="deck__card">
-            <figure class="deck__card--front"></figure>
-            <figure class="deck__card--back"><i class="far fa-gem"></i></figure>
-          </div>
-        </li>
+        <!-- Game Cards go here when play is clicked -->
       </ul>
     </div>
   </div>
-  <script src="scripts/main-min.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 
 </html>

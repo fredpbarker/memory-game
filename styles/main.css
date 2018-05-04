@@ -1,20 +1,9 @@
-@import 'normalize';
-@include normalize();
-
-/* Variables */
-
-$blue: linear-gradient(to bottom, #011eff 0%, #00129e 100%);
-$white: #f2f2f2;
-$orange: #df7619;
-$font: 'IBM Plex Serif', serif;
-
 /* General Page Rules */
-
 html,
 body {
-  background: $white;
+  background: #f2f2f2;
   box-sizing: border-box;
-  font-family: $font;
+  font-family: 'IBM Plex Serif', serif;
   font-size: 22px;
   height: 100%;
   margin: 0;
@@ -33,11 +22,10 @@ body {
 }
 
 /* Sidebar */
-
 .sidebar {
   align-items: center;
-  background: $blue;
-  color: $white;
+  background: linear-gradient(to bottom, #011eff 0%, #00129e 100%);
+  color: #f2f2f2;
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -80,29 +68,32 @@ body {
 
 .start-button,
 .restart-button {
-  background-color: $orange;
+  background-color: #df7619;
   border: 0;
-  box-shadow: 0 5px 0 0 darken($orange, 10%);
-  color: $white;
-  font-family: $font;
+  box-shadow: 0 5px 0 0 #b15e14;
+  color: #f2f2f2;
+  font-family: 'IBM Plex Serif', serif;
   margin: 20px;
   outline: none;
   padding: 15px 20px;
   position: relative;
   text-decoration: none;
+}
 
-  &:active {
-    box-shadow: 0 1px 0 0;
-    transform: translate(0, 5px);
-  }
+.start-button:active,
+.restart-button:active {
+  box-shadow: 0 1px 0 0;
+  transform: translate(0, 5px);
+}
 
-  &:focus {
-    outline: none;
-  }
+.start-button:focus,
+.restart-button:focus {
+  outline: none;
+}
 
-  &:hover {
-    background-color: lighten($orange, 5%);
-  }
+.start-button:hover,
+.restart-button:hover {
+  background-color: #e7832a;
 }
 
 .svg-inline--fa {
@@ -118,7 +109,6 @@ body {
 }
 
 /* Main Content Area */
-
 .main {
   align-items: center;
   display: flex;
@@ -150,16 +140,16 @@ body {
   transform-style: preserve-3d;
   transition: transform 1s;
   width: 100%;
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.deck__card:hover {
+  cursor: pointer;
 }
 
 .deck__card figure {
   align-items: center;
   backface-visibility: hidden;
-  color: $white;
+  color: #f2f2f2;
   display: block;
   display: flex;
   font-size: 25px;
@@ -171,12 +161,12 @@ body {
 }
 
 .deck__card .deck__card--front {
-  background: $blue;
+  background: linear-gradient(to bottom, #011eff 0%, #00129e 100%);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .deck__card .deck__card--back {
-  background: $orange;
+  background: #df7619;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   transform: rotateY(180deg);
 }
@@ -186,7 +176,6 @@ body {
 }
 
 /* Media Queries */
-
 @media screen and (max-width: 975px) {
   .deck {
     max-width: 21rem;
@@ -212,10 +201,3 @@ body {
     margin-top: 2rem;
   }
 }
-
-
-
-
-
-
-
