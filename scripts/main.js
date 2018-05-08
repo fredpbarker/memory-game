@@ -64,40 +64,62 @@ function startGame (event) {
   function addEventListenerToCards () {
     const cards = document.querySelectorAll('.deck__card--front')
     cards.forEach(function (el) {
-      el.addEventListener('click', takeTurn)
+      el.addEventListener('click', ifCardIsClicked)
     })
   }
 
-  function takeTurn (event) {
-    turnCard(event)
+  function ifCardIsClicked (event) {
+    flipCard(event)
     openCardList(event)
     checkCardMatch(event)
   }
 
   // Add the flipped class to any tile that's clicked
-  function turnCard (event) {
+  function flipCard (event) {
     event.target.parentNode.classList.add('flipped')
   }
 
   // Adds cards to an open card array
   let openCards = []
   function openCardList (event) {
-    const cardClass = event.target.nextElementSibling.childNodes[0].classList.item(1)
+    const cardClass = event.target.nextElementSibling
     openCards.push(cardClass)
     console.log(openCards)
   }
 
-  // Check if cards in openCards array match
   function checkCardMatch (event) {
+    // TODO; AFTER ONE SUCCESSFULLY MATCHED PAIR, THIS BECOMES ALWAYS TRUE SO IT TRIES TO RUN ON EVERY SINGLE CARD CLICKED, INSTEAD OF ON A PAIR OF CARDS?
     if (openCards.length > 1) {
-      if (openCards[0] === openCards[1]) {
-        console.log('Match!')
-        event.target.removeEventListener('click', takeTurn)
-      } else {
-        console.log('No Match!')
-        console.log(event.target)
+      let openCard1 = openCards[openCards.length - 1].childNodes[0].classList.item(1)
+      let openCard2 = openCards[openCards.length - 2].childNodes[0].classList.item(1)
+      if (openCard1 === openCard2) {
+        doMatch(event)
+      } else if (openCard1 !== openCard2) {
+        dontMatch(event)
       }
     }
+  }
+
+  function doMatch (event) {
+    openCards[openCards.length - 1].previousElementSibling.removeEventListener('click', ifCardIsClicked)
+    openCards[openCards.length - 2].previousElementSibling.removeEventListener('click', ifCardIsClicked)
+  }
+
+  function dontMatch (event) {
+    openCards.forEach(function (el) {
+      setTimeout(function () {
+        el.parentNode.parentNode.classList.add('animated', 'wobble')
+        el.style.backgroundColor = '#dc143c'
+      }, 1000)
+      setTimeout(function () {
+        el.parentNode.classList.remove('flipped')
+        el.parentNode.parentNode.classList.remove('animated', 'wobble')
+        openCards.splice(openCards.length - 2, 2)
+      }, 2000)
+      setTimeout(function () {
+        el.style.backgroundColor = '#df7619'
+      }, 3500)
+    })
   }
 }
 
