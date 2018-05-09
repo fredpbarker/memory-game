@@ -68,10 +68,13 @@ function startGame (event) {
     })
   }
 
+  // This function runs each time a card is cliked
+  let pairCheckCounter = 0
   function ifCardIsClicked (event) {
+    pairCheckCounter += 1
     flipCard(event)
     openCardList(event)
-    checkCardMatch(event)
+    checkCardMatch(event) // Only set to run when pairCheckCounter is on an even number
   }
 
   // Add the flipped class to any tile that's clicked
@@ -84,13 +87,12 @@ function startGame (event) {
   function openCardList (event) {
     const cardClass = event.target.nextElementSibling
     openCards.push(cardClass)
-    console.log(openCards)
   }
 
+  // Checks of the cards match
   function checkCardMatch (event) {
-    // TODO; AFTER ONE SUCCESSFULLY MATCHED PAIR, THIS BECOMES ALWAYS TRUE SO IT TRIES TO RUN ON EVERY SINGLE CARD CLICKED, INSTEAD OF ON A PAIR OF CARDS?
-    if (openCards.length > 1) {
-      let openCard1 = openCards[openCards.length - 1].childNodes[0].classList.item(1)
+    if (pairCheckCounter % 2 === 0) { // Only runs on even cards/pairs
+      let openCard1 = openCards[openCards.length - 1].childNodes[0].classList.item(1) // Gets the Font Awesome class, example: fa-gem
       let openCard2 = openCards[openCards.length - 2].childNodes[0].classList.item(1)
       if (openCard1 === openCard2) {
         doMatch(event)
@@ -100,26 +102,35 @@ function startGame (event) {
     }
   }
 
+  // Runs if the cards are matched
   function doMatch (event) {
-    openCards[openCards.length - 1].previousElementSibling.removeEventListener('click', ifCardIsClicked)
-    openCards[openCards.length - 2].previousElementSibling.removeEventListener('click', ifCardIsClicked)
+    openCards[openCards.length - 1].previousElementSibling.removeEventListener('click', ifCardIsClicked) // Removes event listener from last card in openCards array
+    openCards[openCards.length - 2].previousElementSibling.removeEventListener('click', ifCardIsClicked) // Removes event listener from second last card in OpenCards array
   }
 
+  // Runs if the cards are not matched
   function dontMatch (event) {
-    openCards.forEach(function (el) {
-      setTimeout(function () {
-        el.parentNode.parentNode.classList.add('animated', 'wobble')
-        el.style.backgroundColor = '#dc143c'
-      }, 1000)
-      setTimeout(function () {
-        el.parentNode.classList.remove('flipped')
-        el.parentNode.parentNode.classList.remove('animated', 'wobble')
-        openCards.splice(openCards.length - 2, 2)
-      }, 2000)
-      setTimeout(function () {
-        el.style.backgroundColor = '#df7619'
-      }, 3500)
-    })
+    setTimeout(function () {
+      // Animate and turn background red for the last two cards in the openCards array
+      openCards[openCards.length - 1].parentNode.parentNode.classList.add('animated', 'wobble')
+      openCards[openCards.length - 2].parentNode.parentNode.classList.add('animated', 'wobble')
+      openCards[openCards.length - 1].style.backgroundColor = '#dc143c'
+      openCards[openCards.length - 2].style.backgroundColor = '#dc143c'
+    }, 1000)
+    setTimeout(function () {
+      // Closes the last two cards in the openCards array and removes the animation classes
+      openCards[openCards.length - 1].parentNode.classList.remove('flipped')
+      openCards[openCards.length - 2].parentNode.classList.remove('flipped')
+      openCards[openCards.length - 1].parentNode.parentNode.classList.remove('animated', 'wobble')
+      openCards[openCards.length - 2].parentNode.parentNode.classList.remove('animated', 'wobble')
+    }, 2000)
+    setTimeout(function () {
+      // Changes background back to orange for the next time they're flipped
+      openCards[openCards.length - 1].style.backgroundColor = '#df7619'
+      openCards[openCards.length - 2].style.backgroundColor = '#df7619'
+      // And finally, removes the last two cards from the openCards array
+      openCards.splice(openCards.length - 2, 2)
+    }, 2300)
   }
 }
 
