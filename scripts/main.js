@@ -70,11 +70,14 @@ function startGame (event) {
 
   // This function runs each time a card is cliked
   let pairCheckCounter = 0
+  let cardClickActive = true
   function ifCardIsClicked (event) {
-    pairCheckCounter += 1
-    flipCard(event)
-    openCardList(event)
-    checkCardMatch(event) // Only set to run when pairCheckCounter is on an even number
+    if (cardClickActive) {
+      pairCheckCounter += 1
+      flipCard(event)
+      openCardList(event)
+      checkCardMatch(event) // Only set to run when pairCheckCounter is on an even number
+    }
   }
 
   // Add the flipped class to any tile that's clicked
@@ -104,18 +107,29 @@ function startGame (event) {
 
   // Runs if the cards are matched
   function doMatch (event) {
-    openCards[openCards.length - 1].previousElementSibling.removeEventListener('click', ifCardIsClicked) // Removes event listener from last card in openCards array
-    openCards[openCards.length - 2].previousElementSibling.removeEventListener('click', ifCardIsClicked) // Removes event listener from second last card in OpenCards array
+    cardClickActive = false
+    // Remove click event handler from the last two cards in the openCards array
+    openCards[openCards.length - 1].previousElementSibling.removeEventListener('click', ifCardIsClicked)
+    openCards[openCards.length - 2].previousElementSibling.removeEventListener('click', ifCardIsClicked)
+    setTimeout(function () {
+      // Animate and turn background green for the last two cards in the openCards array
+      openCards[openCards.length - 1].parentNode.parentNode.classList.add('animated', 'bounce')
+      openCards[openCards.length - 2].parentNode.parentNode.classList.add('animated', 'bounce')
+      openCards[openCards.length - 1].style.backgroundColor = '#008a00'
+      openCards[openCards.length - 2].style.backgroundColor = '#008a00'
+    }, 1000)
+    cardClickActive = true
   }
 
   // Runs if the cards are not matched
   function dontMatch (event) {
+    cardClickActive = false
     setTimeout(function () {
       // Animate and turn background red for the last two cards in the openCards array
       openCards[openCards.length - 1].parentNode.parentNode.classList.add('animated', 'wobble')
       openCards[openCards.length - 2].parentNode.parentNode.classList.add('animated', 'wobble')
-      openCards[openCards.length - 1].style.backgroundColor = '#dc143c'
-      openCards[openCards.length - 2].style.backgroundColor = '#dc143c'
+      openCards[openCards.length - 1].style.backgroundColor = '#d80000'
+      openCards[openCards.length - 2].style.backgroundColor = '#d80000'
     }, 1000)
     setTimeout(function () {
       // Closes the last two cards in the openCards array and removes the animation classes
@@ -130,17 +144,7 @@ function startGame (event) {
       openCards[openCards.length - 2].style.backgroundColor = '#df7619'
       // And finally, removes the last two cards from the openCards array
       openCards.splice(openCards.length - 2, 2)
+      cardClickActive = true
     }, 2300)
   }
 }
-
-/*
- * set up the event listener for a card. If a card is clicked: **DONE**
- *  - display the card's symbol (put this functionality in another function that you call from this one) **DONE**
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
