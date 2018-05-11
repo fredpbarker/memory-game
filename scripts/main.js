@@ -28,9 +28,33 @@ startButton.addEventListener('click', startGame)
 // Start game
 function startGame (event) {
   event.preventDefault()
+  timer()
   shuffleCardList(cardList)
   addCardToPage(cardList)
   addEventListenerToCards()
+
+  // Timer function from https://stackoverflow.com/a/5517836
+  function timer () {
+    let minutesLabel = document.querySelector('.timer__text-minutes')
+    let secondsLabel = document.querySelector('.timer__text-seconds')
+    let totalSeconds = 0
+    setInterval(setTime, 1000)
+
+    function setTime () {
+      ++totalSeconds
+      secondsLabel.innerHTML = pad(totalSeconds % 60)
+      minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
+    }
+
+    function pad (val) {
+      let valString = val + ''
+      if (valString.length < 2) {
+        return '0' + valString
+      } else {
+        return valString
+      }
+    }
+  }
 
   // Shuffle card array from http://stackoverflow.com/a/2450976
   function shuffleCardList (array) {
@@ -71,6 +95,7 @@ function startGame (event) {
   // This function runs each time a card is cliked
   let pairCheckCounter = 0
   let cardClickActive = true
+  let moveCounter = 0
   function ifCardIsClicked (event) {
     if (cardClickActive) {
       pairCheckCounter += 1
@@ -118,7 +143,10 @@ function startGame (event) {
       openCards[openCards.length - 1].style.backgroundColor = '#008a00'
       openCards[openCards.length - 2].style.backgroundColor = '#008a00'
     }, 1000)
-    cardClickActive = true
+    setTimeout(function () {
+      cardClickActive = true
+      incrementMoveCounter()
+    }, 1500)
   }
 
   // Runs if the cards are not matched
@@ -145,6 +173,14 @@ function startGame (event) {
       // And finally, removes the last two cards from the openCards array
       openCards.splice(openCards.length - 2, 2)
       cardClickActive = true
+      incrementMoveCounter()
     }, 2300)
+  }
+
+  // Increments the move counter by 1 on each turn
+  function incrementMoveCounter () {
+    moveCounter += 1
+    const counterSpan = document.querySelector('.move-counter__text-span')
+    counterSpan.innerHTML = moveCounter
   }
 }
