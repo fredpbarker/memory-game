@@ -35,6 +35,11 @@ function restartGame (event) {
   moveCounter = 0
   const counterSpan = document.querySelector('.move-counter__text-span')
   counterSpan.innerHTML = moveCounter
+  minutesLabel.innerHTML = '00'
+  secondsLabel.innerHTML = '00'
+  totalSeconds = 0
+  clearInterval(timerInt)
+  timer()
 }
 
 // Add an event handler that runs the startGame() function when the start button is clicked
@@ -54,11 +59,12 @@ function startGame (event) {
 }
 
 // Timer function from https://stackoverflow.com/a/5517836
+let minutesLabel = document.querySelector('.timer__text-minutes')
+let secondsLabel = document.querySelector('.timer__text-seconds')
+let totalSeconds = 0
+let timerInt
 function timer () {
-  let minutesLabel = document.querySelector('.timer__text-minutes')
-  let secondsLabel = document.querySelector('.timer__text-seconds')
-  let totalSeconds = 0
-  setInterval(setTime, 1000)
+  timerInt = setInterval(setTime, 1000)
 
   function setTime () {
     ++totalSeconds
