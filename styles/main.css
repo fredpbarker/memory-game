@@ -224,12 +224,12 @@ body {
   z-index: 1010;
 }
 
-.modal h2 {
+.modal__header {
   margin: 1rem 1rem 0;
   text-transform: uppercase;
 }
 
-.modal p {
+.modal__text {
   padding: 0 1rem;
 }
 
