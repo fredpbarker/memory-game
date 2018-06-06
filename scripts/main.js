@@ -243,11 +243,10 @@ function checkWin () {
   }
 }
 
-// Functionality to open and close the modal
+// Opens the modal
+let modal = document.querySelector('.modal')
+let modalOverlay = document.querySelector('.modal-overlay')
 function openModal () {
-  let modal = document.querySelector('.modal')
-  let modalOverlay = document.querySelector('.modal-overlay')
-  let modalRestartButton = document.querySelector('.modal__restart-button')
   modal.classList.toggle('closed')
   modalOverlay.classList.toggle('closed')
 
@@ -264,10 +263,13 @@ function openModal () {
   } else {
     starSpan.innerHTML = `${starsRemain.length} Stars`
   }
+}
 
-  modalRestartButton.addEventListener('click', function (event) {
-    modal.classList.toggle('closed')
-    modalOverlay.classList.toggle('closed')
-    restartGame(event)
-  })
+// Closes the modal and restarts the game
+let modalRestartButton = document.querySelector('.modal__restart-button')
+modalRestartButton.addEventListener('click', playAgain)
+function playAgain (event) {
+  modal.classList.toggle('closed')
+  modalOverlay.classList.toggle('closed')
+  restartGame(event)
 }
