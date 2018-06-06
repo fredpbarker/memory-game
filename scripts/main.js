@@ -231,7 +231,7 @@ function incrementMoveCounter () {
   // Remove star after every 12 turns
   const starList = document.querySelector('.rating__star-list')
   const star = document.querySelector('.rating__star-icon')
-  if (moveCounter % 10 === 0) {
+  if (moveCounter % 12 === 0) {
     starList.removeChild(star)
   }
 }
@@ -243,7 +243,7 @@ function checkWin () {
   }
 }
 
-// Opens the modal
+// Opens the modal and gives you your game stats
 let modal = document.querySelector('.modal')
 let modalOverlay = document.querySelector('.modal-overlay')
 function openModal () {
