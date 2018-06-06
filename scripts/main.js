@@ -25,7 +25,7 @@ restartButton.addEventListener('click', restartGame)
 // Restart game
 function restartGame (event) {
   event.preventDefault()
-  let deck = document.querySelector('.deck')
+  const deck = document.querySelector('.deck')
   while (deck.firstChild) {
     deck.removeChild(deck.firstChild)
   }
@@ -41,10 +41,10 @@ function restartGame (event) {
   totalSeconds = 0
   clearInterval(timerInt)
   timer()
-  let rating = document.querySelector('.rating')
-  let starList = document.querySelector('.rating__star-list')
+  const rating = document.querySelector('.rating')
+  const starList = document.querySelector('.rating__star-list')
   rating.removeChild(starList)
-  let newStarList = document.createElement('ul')
+  const newStarList = document.createElement('ul')
   newStarList.className = 'rating__star-list'
   newStarList.innerHTML = `
     <li class="rating__star-icon">
@@ -65,7 +65,7 @@ startButton.addEventListener('click', startGame)
 
 // Start game
 function startGame (event) {
-  let allCards = document.querySelectorAll('.deck__card-container')
+  const allCards = document.querySelectorAll('.deck__card-container')
   if (allCards.length !== 16) {
     event.preventDefault()
     timer()
@@ -76,8 +76,8 @@ function startGame (event) {
 }
 
 // Timer function from https://stackoverflow.com/a/5517836
-let minutesLabel = document.querySelector('.timer__text-minutes')
-let secondsLabel = document.querySelector('.timer__text-seconds')
+const minutesLabel = document.querySelector('.timer__text-minutes')
+const secondsLabel = document.querySelector('.timer__text-seconds')
 let totalSeconds = 0
 let timerInt
 function timer () {
@@ -116,7 +116,7 @@ function shuffleCardList (array) {
 function addCardToPage (array) {
   const deck = document.querySelector('.deck')
   array.forEach(function (el) {
-    let cardHTML = document.createElement('li')
+    const cardHTML = document.createElement('li')
     cardHTML.className = 'deck__card-container'
     cardHTML.innerHTML = `
         <div class="deck__card">
@@ -244,20 +244,20 @@ function checkWin () {
 }
 
 // Opens the modal and gives you your game stats
-let modal = document.querySelector('.modal')
-let modalOverlay = document.querySelector('.modal-overlay')
+const modal = document.querySelector('.modal')
+const modalOverlay = document.querySelector('.modal-overlay')
 function openModal () {
   modal.classList.toggle('closed')
   modalOverlay.classList.toggle('closed')
 
-  let moveSpan = document.querySelector('.modal__move-span')
+  const moveSpan = document.querySelector('.modal__move-span')
   moveSpan.innerHTML = moveCounter
 
-  let timerSpan = document.querySelector('.modal__timer-span')
+  const timerSpan = document.querySelector('.modal__timer-span')
   timerSpan.innerHTML = `${minutesLabel.innerHTML}:${secondsLabel.innerHTML}`
 
-  let starSpan = document.querySelector('.modal__star-span')
-  let starsRemain = document.querySelectorAll('.rating__star-icon')
+  const starSpan = document.querySelector('.modal__star-span')
+  const starsRemain = document.querySelectorAll('.rating__star-icon')
   if (starsRemain.length === 1) {
     starSpan.innerHTML = `1 Star`
   } else {
@@ -266,7 +266,7 @@ function openModal () {
 }
 
 // Closes the modal and restarts the game
-let modalRestartButton = document.querySelector('.modal__restart-button')
+const modalRestartButton = document.querySelector('.modal__restart-button')
 modalRestartButton.addEventListener('click', playAgain)
 function playAgain (event) {
   modal.classList.toggle('closed')
