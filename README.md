@@ -1,5 +1,7 @@
 # Memory Game for Udacity's Front-End Web Developer Nanodegree
 
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+
 ## General Notes
 
 - Uses the shuffle array function from here: http://stackoverflow.com/a/2450976
