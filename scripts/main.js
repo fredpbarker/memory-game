@@ -33,6 +33,7 @@ function restartGame (event) {
   addCardToPage(cardList)
   addEventListenerToCards()
   moveCounter = 0
+  openCards = []
   const counterSpan = document.querySelector('.move-counter__text-span')
   counterSpan.innerHTML = moveCounter
   minutesLabel.innerHTML = '00'
@@ -40,6 +41,22 @@ function restartGame (event) {
   totalSeconds = 0
   clearInterval(timerInt)
   timer()
+  let rating = document.querySelector('.rating')
+  let starList = document.querySelector('.rating__star-list')
+  rating.removeChild(starList)
+  let newStarList = document.createElement('ul')
+  newStarList.className = 'rating__star-list'
+  newStarList.innerHTML = `
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>`
+  rating.appendChild(newStarList)
 }
 
 // Add an event handler that runs the startGame() function when the start button is clicked
@@ -222,6 +239,35 @@ function incrementMoveCounter () {
 // Checks if the game is over
 function checkWin () {
   if (openCards.length === 16) {
-    alert('You won!')
+    openModal()
   }
+}
+
+// Functionality to open and close the modal
+function openModal () {
+  let modal = document.querySelector('.modal')
+  let modalOverlay = document.querySelector('.modal-overlay')
+  let modalRestartButton = document.querySelector('.modal__restart-button')
+  modal.classList.toggle('closed')
+  modalOverlay.classList.toggle('closed')
+
+  let moveSpan = document.querySelector('.modal__move-span')
+  moveSpan.innerHTML = moveCounter
+
+  let timerSpan = document.querySelector('.modal__timer-span')
+  timerSpan.innerHTML = `${minutesLabel.innerHTML}:${secondsLabel.innerHTML}`
+
+  let starSpan = document.querySelector('.modal__star-span')
+  let starsRemain = document.querySelectorAll('.rating__star-icon')
+  if (starsRemain.length === 1) {
+    starSpan.innerHTML = `1 Star`
+  } else {
+    starSpan.innerHTML = `${starsRemain.length} Stars`
+  }
+
+  modalRestartButton.addEventListener('click', function (event) {
+    modal.classList.toggle('closed')
+    modalOverlay.classList.toggle('closed')
+    restartGame(event)
+  })
 }

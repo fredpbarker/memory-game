@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles/animate.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script defer src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <title>Memory Game</title>
 </head>
 
@@ -18,7 +19,7 @@
   <div class="page-container">
     <div class="sidebar">
       <header class="header">
-        <img class="header__icon" src="assets/brain.svg" alt="">
+        <img class="header__icon" src="assets/brain.svg" alt="Brain / Lightbulb Illustration">
         <h1 class="header__title">Memory<br>Game</h1>
       </header>
       <div class="game-information">
@@ -59,6 +60,18 @@
       </ul>
     </div>
   </div>
+
+  <div class="modal closed">
+      <img class="header__icon" src="assets/brain.svg" alt="Brain / Lightbulb Illustration">
+    <h2 class="modal__header">You did it!</h2>
+    <p class="modal__text">You matched all of the tiles in <span class="modal__move-span"></span> moves, your total time was <span class="modal__timer-span"></span>, and you have <span class="modal__star-span"></span> remaining.</p>
+    <button class="modal__restart-button">
+      Play Again?
+    </button>
+  </div>
+  <div class="modal-overlay closed">
+  </div>
+
   <script src="scripts/main.js"></script>
 </body>
 

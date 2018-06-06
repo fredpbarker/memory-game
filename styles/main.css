@@ -67,7 +67,8 @@ body {
 }
 
 .start-button,
-.restart-button {
+.restart-button,
+.modal__restart-button {
   background-color: #df7619;
   border: 0;
   box-shadow: 0 5px 0 0 #b15e14;
@@ -81,18 +82,21 @@ body {
 }
 
 .start-button:active,
-.restart-button:active {
+.restart-button:active,
+.modal__restart-button:active {
   box-shadow: 0 1px 0 0;
   transform: translate(0, 5px);
 }
 
 .start-button:focus,
-.restart-button:focus {
+.restart-button:focus,
+.modal__restart-button:focus {
   outline: none;
 }
 
 .start-button:hover,
-.restart-button:hover {
+.restart-button:hover,
+.modal__restart-button:hover {
   background-color: #e7832a;
 }
 
@@ -200,4 +204,50 @@ body {
   .main {
     margin-top: 2rem;
   }
+}
+
+/* Modal */
+.modal {
+  align-items: center;
+  background: #011eff;
+  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 650px;
+  z-index: 1010;
+}
+
+.modal h2 {
+  margin: 1rem 1rem 0;
+  text-transform: uppercase;
+}
+
+.modal p {
+  padding: 0 1rem;
+}
+
+.modal-overlay {
+  background: rgba(92, 92, 92, 0.8);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.modal__restart-button {
+  margin-bottom: 2rem;
+}
+
+.modal.closed,
+.modal-overlay.closed {
+  display: none;
 }
