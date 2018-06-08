@@ -18,47 +18,6 @@ let cardList = [
   'far fa-gem'
 ];
 
-// Add an event handler that runs the restartGame() function when the restart button is clicked
-const restartButton = document.querySelector('.restart-button');
-restartButton.addEventListener('click', restartGame);
-
-// Restart game
-function restartGame (event) {
-  event.preventDefault();
-  const deck = document.querySelector('.deck');
-  while (deck.firstChild) {
-    deck.removeChild(deck.firstChild);
-  }
-  shuffleCardList(cardList);
-  addCardToPage(cardList);
-  addEventListenerToCards();
-  moveCounter = 0;
-  openCards = [];
-  const counterSpan = document.querySelector('.move-counter__text-span');
-  counterSpan.innerHTML = moveCounter;
-  minutesLabel.innerHTML = '00';
-  secondsLabel.innerHTML = '00';
-  totalSeconds = 0;
-  clearInterval(timerInt);
-  timer();
-  const rating = document.querySelector('.rating');
-  const starList = document.querySelector('.rating__star-list');
-  rating.removeChild(starList);
-  const newStarList = document.createElement('ul');
-  newStarList.className = 'rating__star-list';
-  newStarList.innerHTML = `
-    <li class="rating__star-icon">
-      <i class="fas fa-star"></i>
-    </li>
-    <li class="rating__star-icon">
-      <i class="fas fa-star"></i>
-    </li>
-    <li class="rating__star-icon">
-      <i class="fas fa-star"></i>
-    </li>`;
-  rating.appendChild(newStarList);
-}
-
 // Add an event handler that runs the startGame() function when the start button is clicked
 const startButton = document.querySelector('.start-button');
 startButton.addEventListener('click', startGame);
@@ -135,7 +94,7 @@ function addEventListenerToCards () {
   });
 }
 
-// This function runs each time a card is cliked
+// This function runs each time a card is clicked
 let pairCheckCounter = 0;
 let cardClickActive = true;
 function ifCardIsClicked (event) {
@@ -156,6 +115,8 @@ function flipCard (event) {
 let openCards = [];
 function openCardList (event) {
   const cardClass = event.target.nextElementSibling;
+  // Removes the event handler on the card that was clicked to prevent it from trying to match itself
+  event.target.removeEventListener('click', ifCardIsClicked);
   openCards.push(cardClass);
 }
 
@@ -215,6 +176,9 @@ function dontMatch (event) {
     // Changes background back to orange for the next time they're flipped
     openCards[openCards.length - 1].style.backgroundColor = '#df7619';
     openCards[openCards.length - 2].style.backgroundColor = '#df7619';
+    // Adds the event listener back to the cards that were clicked
+    openCards[openCards.length - 1].previousElementSibling.addEventListener('click', ifCardIsClicked);
+    openCards[openCards.length - 2].previousElementSibling.addEventListener('click', ifCardIsClicked);
     // And finally, removes the last two cards from the openCards array
     openCards.splice(openCards.length - 2, 2);
     cardClickActive = true;
@@ -228,19 +192,63 @@ function incrementMoveCounter () {
   moveCounter += 1;
   const counterSpan = document.querySelector('.move-counter__text-span');
   counterSpan.innerHTML = moveCounter;
-  // Remove star after every 12 turns
+  // Remove star after every 14 turns
   const starList = document.querySelector('.rating__star-list');
   const star = document.querySelector('.rating__star-icon');
-  if (moveCounter % 12 === 0) {
-    starList.removeChild(star);
+  if (starList.children.length > 1) { // Prevents the removal of the last star
+    if (moveCounter % 14 === 0) {
+      starList.removeChild(star);
+    }
   }
 }
 
 // Checks if the game is over
 function checkWin () {
   if (openCards.length === 16) {
+    clearInterval(timerInt);
     openModal();
   }
+}
+
+// Add an event handler that runs the restartGame() function when the restart button is clicked
+const restartButton = document.querySelector('.restart-button');
+restartButton.addEventListener('click', restartGame);
+
+// Restart game
+function restartGame (event) {
+  event.preventDefault();
+  const deck = document.querySelector('.deck');
+  while (deck.firstChild) {
+    deck.removeChild(deck.firstChild);
+  }
+  shuffleCardList(cardList);
+  addCardToPage(cardList);
+  addEventListenerToCards();
+  moveCounter = 0;
+  openCards = [];
+  const counterSpan = document.querySelector('.move-counter__text-span');
+  counterSpan.innerHTML = moveCounter;
+  minutesLabel.innerHTML = '00';
+  secondsLabel.innerHTML = '00';
+  totalSeconds = 0;
+  clearInterval(timerInt);
+  timer();
+  const rating = document.querySelector('.rating');
+  const starList = document.querySelector('.rating__star-list');
+  rating.removeChild(starList);
+  const newStarList = document.createElement('ul');
+  newStarList.className = 'rating__star-list';
+  newStarList.innerHTML = `
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>
+    <li class="rating__star-icon">
+      <i class="fas fa-star"></i>
+    </li>`;
+  rating.appendChild(newStarList);
 }
 
 // Opens the modal and gives you your game stats
