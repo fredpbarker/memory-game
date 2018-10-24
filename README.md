@@ -14,7 +14,7 @@ There are eight pairs of cards on the board. The object of the game is to match 
 
 ## Play The Game
 
-https://fredpbarker.github.io/memory-game/
+https://fpbark.github.io/memory-game/
 
 The timer begins as soon as you hit the play button.
 
